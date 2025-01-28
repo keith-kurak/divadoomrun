@@ -14,6 +14,7 @@ const Canvas = p => {
       })}
     >
       <canvas
+        webkit-playsinline="true"
         className={
           cx('canvas', {
             fullscreen: p.fullscreen,

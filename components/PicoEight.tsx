@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { useDOMImperativeHandle, type DOMImperativeFactory } from "expo/dom";
 import { Pico8 } from "./react-pico-8-src";
+// import Pico8 from "react-pico-8";
 import {
   Controls,
   Reset,
@@ -20,7 +21,6 @@ import { JSONValue } from "expo/build/dom/dom.types";
 
 export interface PicoEightHandle extends DOMImperativeFactory {
   updatePress: (arg: JSONValue) => void;
-  test: (args: JSONValue) => void;
 };
 
 export type PicoEightProps = {
@@ -32,10 +32,6 @@ const PicoEight = forwardRef<PicoEightHandle, PicoEightProps>(function (
   ref
 ) {
   useDOMImperativeHandle(ref, () => ({
-    test(args: JSONValue) { 
-      console.log(args["right"]);
-      console.log("Test");
-    },
     updatePress(args: JSONValue) {
       // @ts-ignore
       const { up, down, left, right, x, o } = args;

@@ -62,6 +62,13 @@ export const Pico8 = ({ className, css, ...restProps }) => {
     run()
     window.p8_create_audio_context()
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      start()
+    }, 200)
+  }, [])
+
   const autoStart = () => {
     const temp_context = (() => {
       var AC
@@ -97,16 +104,16 @@ export const Pico8 = ({ className, css, ...restProps }) => {
     setMobile(true)
   }
   useEffect(() => {
-    // setMobile(true)
+    //setMobile(true)
     startPico()
     if (p.autoPlay) autoStart()
     addEvent('keydown', keydown, { passive: false })
-    addEvent('touchstart', onMobile, { passive: true })
+    //addEvent('touchstart', onMobile, { passive: true })
     onFullscreenEvent(fullscreenChange, false)
     return () => {
       removePico()
       removeEvent('keydown', keydown, { passive: false })
-      removeEvent('touchstart', onMobile, { passive: true })
+      //removeEvent('touchstart', onMobile, { passive: true })
       removeOnFullscreenEvent(fullscreenChange, false)
       removeEvent('keydown', blockKeys, { passive: false })
     }
