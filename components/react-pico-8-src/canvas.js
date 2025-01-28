@@ -21,6 +21,7 @@ const Canvas = p => {
             none: p.hasStarted && p.hideCursor
           }) + ' emscripten'
         }
+        //style={{ width: '100%' }} /* interesting */
         id="canvas"
         onContextMenu={e => e.preventDefault()}
         onKeyDown={blockKeys}

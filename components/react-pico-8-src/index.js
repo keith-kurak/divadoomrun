@@ -97,7 +97,7 @@ export const Pico8 = ({ className, css, ...restProps }) => {
     setMobile(true)
   }
   useEffect(() => {
-    setMobile(true)
+    // setMobile(true)
     startPico()
     if (p.autoPlay) autoStart()
     addEvent('keydown', keydown, { passive: false })
@@ -165,7 +165,7 @@ export const Pico8 = ({ className, css, ...restProps }) => {
     reset
   }
   return (
-    <div css={css} className={className} style={p.style}>
+    <div css={css} className={className} style={{ width: '100%'}}>
       <canvas className={styles.hide} />
       <div id="p8_container">
         {!hasStarted ? (
@@ -197,7 +197,7 @@ export const Pico8 = ({ className, css, ...restProps }) => {
                     center: p.legacyButtons && p.center
                   })}
                 >
-                  <Buttons {...buttonData} />
+                  {null}
                 </div>
               ) : null}
             </Canvas>
