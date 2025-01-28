@@ -4,6 +4,7 @@ import React, {
   forwardRef,
   useRef,
   useEffect,
+  useState
 } from "react";
 import { useDOMImperativeHandle, type DOMImperativeFactory } from "expo/dom";
 import { Pico8 } from "./react-pico-8-src";
@@ -27,6 +28,15 @@ export type PicoEightProps = {
   dom?: import("expo/dom").DOMProps;
 };
 
+const buttonStates = {
+  up: false,
+  down: false,
+  left: false,
+  right: false,
+  x: false,
+  o: false,
+}
+
 const PicoEight = forwardRef<PicoEightHandle, PicoEightProps>(function (
   props,
   ref
@@ -34,8 +44,12 @@ const PicoEight = forwardRef<PicoEightHandle, PicoEightProps>(function (
   useDOMImperativeHandle(ref, () => ({
     updatePress(args: JSONValue) {
       // @ts-ignore
-      const { up, down, left, right, x, o } = args;
-      console.log(args);
+      const { button, state } = args;
+
+      // @ts-ignore
+      buttonStates[button] = state;
+
+      const { up, down, left, right, x, o } = buttonStates;
 
       // @ts-ignore
       pico8_buttons[0] = 0;
@@ -65,6 +79,7 @@ const PicoEight = forwardRef<PicoEightHandle, PicoEightProps>(function (
       window.pico8_buttons[0] |= buttons;
     },
   }));
+  
   /*useEffect(() => {
     setTimeout(() => {
       console.log("Injecting button press");

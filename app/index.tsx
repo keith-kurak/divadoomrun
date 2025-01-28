@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { GestureDetector, Gesture } from "react-native-gesture-handler";
@@ -9,20 +9,53 @@ import PicoEight, { type PicoEightHandle } from "@/components/PicoEight";
 export default function Index() {
   const picoEightRef = useRef<PicoEightHandle>(null);
 
-  const [buttons, setButtons] = useState({
-    up: false,
-    down: false,
-    left: false,
-    right: false,
-    x: false,
-    o: false,
-  });
+  const buttonUpTrue = () => {
+    picoEightRef.current?.updatePress({ button: "up", state: true });
+  }
 
-  useEffect(() => {
-    if (picoEightRef.current?.updatePress) {
-      picoEightRef.current?.updatePress(buttons);
-    }
-  }, [buttons]);
+  const buttonUpFalse = () => {
+    picoEightRef.current?.updatePress({ button: "up", state: false });
+  }
+
+  const buttonDownTrue = () => {
+    picoEightRef.current?.updatePress({ button: "down", state: true });
+  }
+
+  const buttonDownFalse = () => {
+    picoEightRef.current?.updatePress({ button: "down", state: false });
+  }
+
+  const buttonLeftTrue = () => {
+    picoEightRef.current?.updatePress({ button: "left", state: true });
+  }
+
+  const buttonLeftFalse = () => {
+    picoEightRef.current?.updatePress({ button: "left", state: false });
+  }
+
+  const buttonRightTrue = () => {
+    picoEightRef.current?.updatePress({ button: "right", state: true });
+  }
+
+  const buttonRightFalse = () => {
+    picoEightRef.current?.updatePress({ button: "right", state: false });
+  }
+
+  const buttonXTrue = () => {
+    picoEightRef.current?.updatePress({ button: "x", state: true });
+  }
+
+  const buttonXFalse = () => {
+    picoEightRef.current?.updatePress({ button: "x", state: false });
+  }
+
+  const buttonOTrue = () => {
+    picoEightRef.current?.updatePress({ button: "o", state: true });
+  }
+
+  const buttonOFalse = () => {
+    picoEightRef.current?.updatePress({ button: "o", state: false });
+  }
 
   return (
     <View
@@ -54,48 +87,32 @@ export default function Index() {
           >
             <MyPressable
               style={$getGamePadButtonStyle({})}
-              onPressIn={() => {
-                setButtons({ ...buttons, up: true });
-              }}
-              onPressOut={() => {
-                setButtons({ ...buttons, up: false });
-              }}
+              onPressIn={buttonUpTrue}
+              onPressOut={buttonUpFalse}
             >
               <AntDesign name="caretup" size={60} color="gray" />
             </MyPressable>
             <View style={{ flexDirection: "row" }}>
               <MyPressable
                 style={$getGamePadButtonStyle({})}
-                onPressIn={() => {
-                  setButtons({ ...buttons, left: true });
-                }}
-                onPressOut={() => {
-                  setButtons({ ...buttons, left: false });
-                }}
+                onPressIn={buttonLeftTrue}
+                onPressOut={buttonLeftFalse}
               >
                 <AntDesign name="caretleft" size={60} color="gray" />
               </MyPressable>
               <View style={{ width: 40 }} />
               <MyPressable
                 style={$getGamePadButtonStyle({})}
-                onPressIn={() => {
-                  setButtons({ ...buttons, right: true });
-                }}
-                onPressOut={() => {
-                  setButtons({ ...buttons, right: false });
-                }}
+                onPressIn={buttonRightTrue}
+                onPressOut={buttonRightFalse}
               >
                 <AntDesign name="caretright" size={60} color="gray" />
               </MyPressable>
             </View>
             <MyPressable
               style={$getGamePadButtonStyle({})}
-              onPressIn={() => {
-                setButtons({ ...buttons, down: true });
-              }}
-              onPressOut={() => {
-                setButtons({ ...buttons, down: false });
-              }}
+              onPressIn={buttonDownTrue}
+              onPressOut={buttonDownFalse}
             >
               <AntDesign name="caretdown" size={60} color="gray" />
             </MyPressable>
@@ -109,12 +126,8 @@ export default function Index() {
             }}
           >
             <MyPressable
-              onPressIn={() => {
-                setButtons({ ...buttons, x: true });
-              }}
-              onPressOut={() => {
-                setButtons({ ...buttons, x: false });
-              }}
+              onPressIn={buttonXTrue}
+              onPressOut={buttonXFalse}
               style={$getGamePadButtonStyle({
                 width: 80,
                 height: 80,
@@ -129,12 +142,8 @@ export default function Index() {
             </MyPressable>
             <View style={{ width: 10 }} />
             <MyPressable
-              onPressIn={() => {
-                setButtons({ ...buttons, o: true });
-              }}
-              onPressOut={() => {
-                setButtons({ ...buttons, o: false });
-              }}
+              onPressIn={buttonOTrue}
+              onPressOut={buttonOFalse}
               style={$getGamePadButtonStyle({
                 width: 80,
                 height: 80,
