@@ -5,6 +5,7 @@ import {
   GestureDetector,
   Gesture,
 } from "react-native-gesture-handler";
+import * as Haptics from 'expo-haptics';
 
 import PicoEight, { type PicoEightHandle } from "@/components/PicoEight";
 
@@ -192,6 +193,7 @@ function CustomPressable({
         .onBegin(() => {
             setPressed(true);
             onBegin();
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         })
         .onEnd(() => {
             setPressed(false);

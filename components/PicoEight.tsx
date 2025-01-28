@@ -74,7 +74,6 @@ const PicoEight = forwardRef<PicoEightHandle, PicoEightProps>(function (
       console.log("Injecting button press");
       window.pico8_buttons[0] |= 0x10
       window.pico8_buttons[0] |= 0x2
-      //window.pico8_buttons[0] |= 0x20
     }, 5000);
   }, []);*/
 
