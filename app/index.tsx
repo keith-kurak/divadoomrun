@@ -47,7 +47,7 @@ export default function Index() {
               marginLeft: 12,
             }}
           >
-            <Pressable
+            <MyPressable
               style={$getGamePadButtonStyle({})}
               onPressIn={() => {
                 setButtons({ ...buttons, up: true });
@@ -57,9 +57,9 @@ export default function Index() {
               }}
             >
               <AntDesign name="caretup" size={60} color="gray" />
-            </Pressable>
+            </MyPressable>
             <View style={{ flexDirection: "row" }}>
-              <Pressable
+              <MyPressable
                 style={$getGamePadButtonStyle({})}
                 onPressIn={() => {
                   setButtons({ ...buttons, left: true });
@@ -69,9 +69,9 @@ export default function Index() {
                 }}
               >
                 <AntDesign name="caretleft" size={60} color="gray" />
-              </Pressable>
+              </MyPressable>
               <View style={{ width: 40 }} />
-              <Pressable
+              <MyPressable
                 style={$getGamePadButtonStyle({})}
                 onPressIn={() => {
                   setButtons({ ...buttons, right: true });
@@ -81,9 +81,9 @@ export default function Index() {
                 }}
               >
                 <AntDesign name="caretright" size={60} color="gray" />
-              </Pressable>
+              </MyPressable>
             </View>
-            <Pressable
+            <MyPressable
               style={$getGamePadButtonStyle({})}
               onPressIn={() => {
                 setButtons({ ...buttons, down: true });
@@ -93,7 +93,7 @@ export default function Index() {
               }}
             >
               <AntDesign name="caretdown" size={60} color="gray" />
-            </Pressable>
+            </MyPressable>
           </View>
           <View
             style={{
@@ -103,7 +103,7 @@ export default function Index() {
               marginRight: 12,
             }}
           >
-            <Pressable
+            <MyPressable
               onPressIn={() => {
                 setButtons({ ...buttons, x: true });
               }}
@@ -121,9 +121,9 @@ export default function Index() {
               })}
             >
               <Text style={{ color: "white", fontSize: 40 }}>X</Text>
-            </Pressable>
+            </MyPressable>
             <View style={{ width: 10 }} />
-            <Pressable
+            <MyPressable
               onPressIn={() => {
                 setButtons({ ...buttons, o: true });
               }}
@@ -140,13 +140,30 @@ export default function Index() {
               })}
             >
               <Text style={{ color: "white", fontSize: 40 }}>O</Text>
-            </Pressable>
+            </MyPressable>
           </View>
         </View>
       </View>
     </View>
   );
 }
+
+const MyPressable = (props: {
+  onPressIn: () => void;
+  onPressOut: () => void;
+  style: any;
+  children: any;
+}) => {
+  return (
+    <View
+      onTouchStart={props.onPressIn}
+      onTouchEnd={props.onPressOut}
+      style={props.style(false)}
+    >
+      {props.children}
+    </View>
+  );
+};
 
 const $getGamePadButtonStyle = (style: any) => {
   return ({ pressed }: { pressed: boolean }) => [
